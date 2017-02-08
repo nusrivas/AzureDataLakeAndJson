@@ -1,1 +1,54 @@
-﻿
+﻿REFERENCE ASSEMBLY [Newtonsoft.Json];
+REFERENCE ASSEMBLY [Microsoft.Analytics.Samples.Formats];
+
+USING System;
+USING Microsoft.Analytics.Samples.Formats.Json;
+
+// Reading json file from root.
+@Data =
+    EXTRACT deviceid int,
+            build string,
+            user string,     // Json object.
+            date DateTime
+    FROM @"/input/{date:yyyy}/{date:MM}/{date:dd}/{*}.json"
+    USING new JsonExtractor();
+
+// Parsing the internal json (i.e. user)
+@Data =
+    SELECT deviceid,
+           build,
+           JsonFunctions.JsonTuple(user) AS user,
+           date
+    FROM @Data;
+
+// Extracting fields from user
+@Result =
+    SELECT deviceid,
+           build,
+           user["firstname"]AS firstname,
+           user["lastname"]AS lastname,
+           date
+    FROM @Data;
+
+
+OUTPUT @Result
+TO "/output/AllLogs.tsv"
+USING Outputters.Tsv();
+
+// Demo: How to filter using date range.
+@Result =
+    SELECT deviceid,
+           build,
+           firstname,
+           lastname
+    FROM @Result
+    WHERE date >= DateTime.Parse("01/31/2017");
+                                                           
+
+OUTPUT @Result
+TO "/output/FilterLogs.tsv"
+USING Outputters.Tsv();
+
+
+
+
