@@ -11,7 +11,7 @@
     <Name>AzureDataLakeWithJson</Name>
     <RootNamespace>AzureDataLakeWithJson</RootNamespace>
     <RuntimeVersion>default</RuntimeVersion>
-    <OutputStreamPath>E:\Scratch\ADLLocalDataRoot</OutputStreamPath>
+    <OutputStreamPath>C:\Src\Data</OutputStreamPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,10 +22,14 @@
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Script Include="CSVExtractor.usql" />
     <Script Include="GenericDelimiterExtraction.usql" />
     <Script Include="SimpleJsonExtraction.usql" />
     <Script Include="SpecificJsonExtraction.usql" />
     <Script Include="SpecificPipeDataExtration.usql" />
+    <ScriptCode Include="CSVExtractor.usql.cs">
+      <DependentUpon>CSVExtractor.usql</DependentUpon>
+    </ScriptCode>
     <ScriptCode Include="GenericDelimiterExtraction.usql.cs">
       <DependentUpon>GenericDelimiterExtraction.usql</DependentUpon>
     </ScriptCode>

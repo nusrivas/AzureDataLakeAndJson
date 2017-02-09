@@ -8,10 +8,10 @@ USING CustomExtractors;
             LastName string,
             Address string,
             Age string
-    FROM @"/input/pipedata.txt"
-    USING new GenericDelimiterExtractor('|');
+    FROM @"/input/commadata.txt"
+    USING new GenericDelimiterExtractor(',');
 
 
 OUTPUT @Data
-TO "/output/pipeoutput.tsv"
+TO "/output/commaoutput.tsv"
 USING Outputters.Tsv();

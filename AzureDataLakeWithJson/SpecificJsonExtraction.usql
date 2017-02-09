@@ -12,7 +12,13 @@ USING CustomExtractors;
     FROM @"/input/{date:yyyy}/{date:MM}/{date:dd}/{*}.json"
     USING new JsonExtractor();
 
+// Consider logs that we received in Feb 01 and Feb 02 ONLY.
+@Data = SELECT * FROM @Data 
+    WHERE date >= System.DateTime.Parse("02/01/2017")
+    AND date <= System.DateTime.Parse("02/02/2017");
+
+// Next aggregation...
 
 OUTPUT @Data
-TO "/output/AllCustomLogs.tsv"
+TO "/output/FebLogs.tsv"
 USING Outputters.Tsv();
