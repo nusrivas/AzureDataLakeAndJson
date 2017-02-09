@@ -22,9 +22,13 @@
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Script Include="Script.usql" />
-    <ScriptCode Include="Script.usql.cs">
-      <DependentUpon>Script.usql</DependentUpon>
+    <Script Include="SimpleJsonExtraction.usql" />
+    <Script Include="SpecificJsonExtractor.usql" />
+    <ScriptCode Include="SimpleJsonExtraction.usql.cs">
+      <DependentUpon>SimpleJsonExtraction.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="SpecificJsonExtractor.usql.cs">
+      <DependentUpon>SpecificJsonExtractor.usql</DependentUpon>
     </ScriptCode>
   </ItemGroup>
   <Import Project="$(AppData)\Microsoft\DataLake\MsBuild\1.0\Usql.targets" />

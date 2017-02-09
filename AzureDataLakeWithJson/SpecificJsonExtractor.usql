@@ -1,0 +1,18 @@
+﻿REFERENCE ASSEMBLY [Newtonsoft.Json];
+REFERENCE ASSEMBLY [CustomExtractors];
+
+USING CustomExtractors;
+
+@Data =
+    EXTRACT DeviceId int,
+            Build string,
+            FirstName string,
+            LastName string,
+            date DateTime
+    FROM @"/input/{date:yyyy}/{date:MM}/{date:dd}/{*}.json"
+    USING new JsonExtractor();
+
+
+OUTPUT @Data
+TO "/output/AllCustomLogs.tsv"
+USING Outputters.Tsv();
