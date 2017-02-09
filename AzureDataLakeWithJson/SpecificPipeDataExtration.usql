@@ -1,0 +1,17 @@
+﻿REFERENCE ASSEMBLY [Newtonsoft.Json];
+REFERENCE ASSEMBLY [CustomExtractors];
+
+USING CustomExtractors;
+
+@Data =
+    EXTRACT FirstName string,
+            LastName string,
+            Address string,
+            Age int
+    FROM @"/input/pipedata.txt"
+    USING new PipeExtractor();
+
+
+OUTPUT @Data
+TO "/output/pipeoutput.tsv"
+USING Outputters.Tsv();

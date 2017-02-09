@@ -11,7 +11,7 @@
     <Name>AzureDataLakeWithJson</Name>
     <RootNamespace>AzureDataLakeWithJson</RootNamespace>
     <RuntimeVersion>default</RuntimeVersion>
-    <OutputStreamPath>C:\Users\rashah\AppData\Local\USQLDataRoot</OutputStreamPath>
+    <OutputStreamPath>E:\Scratch\ADLLocalDataRoot</OutputStreamPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,13 +22,21 @@
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Script Include="GenericDelimiterExtraction.usql" />
     <Script Include="SimpleJsonExtraction.usql" />
-    <Script Include="SpecificJsonExtractor.usql" />
+    <Script Include="SpecificJsonExtraction.usql" />
+    <Script Include="SpecificPipeDataExtration.usql" />
+    <ScriptCode Include="GenericDelimiterExtraction.usql.cs">
+      <DependentUpon>GenericDelimiterExtraction.usql</DependentUpon>
+    </ScriptCode>
     <ScriptCode Include="SimpleJsonExtraction.usql.cs">
       <DependentUpon>SimpleJsonExtraction.usql</DependentUpon>
     </ScriptCode>
-    <ScriptCode Include="SpecificJsonExtractor.usql.cs">
-      <DependentUpon>SpecificJsonExtractor.usql</DependentUpon>
+    <ScriptCode Include="SpecificJsonExtraction.usql.cs">
+      <DependentUpon>SpecificJsonExtraction.usql</DependentUpon>
+    </ScriptCode>
+    <ScriptCode Include="SpecificPipeDataExtration.usql.cs">
+      <DependentUpon>SpecificPipeDataExtration.usql</DependentUpon>
     </ScriptCode>
   </ItemGroup>
   <Import Project="$(AppData)\Microsoft\DataLake\MsBuild\1.0\Usql.targets" />
